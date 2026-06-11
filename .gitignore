@@ -13,3 +13,6 @@ Thumbs.db
 
 #templates klasörünü gecici olarak ekledim.
 templates/
+
+#git.sh eklendi
+git.sh
