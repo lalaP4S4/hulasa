@@ -1,0 +1,22 @@
+# Obsidian'ın o anki açık sekmeleri tuttuğu geçici dosya (Kesinlikle engellenmeli)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Eklenti önbellekleri ve sözlükler
+.obsidian/plugins/obsidian-git/
+.obsidian/caches/
+.obsidian/.trash/
+
+# İşletim sistemi geçici dosyaları
+.DS_Store
+Thumbs.db
+
+#gizlenecek klasörler
+templates/
+.obsidian/
+
+# gizlenecek dosyalar
+*.sh
+*.txt
+index.md.bak
+
