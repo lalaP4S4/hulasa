@@ -17,5 +17,7 @@ Thumbs.db
 #templates klasörünü gecici olarak ekledim.
 templates/
 
-#git.sh eklendi
+# git.sh eklendi
 git.sh
+# index.md.bak dosyası eklendi.
+index.md.bak
