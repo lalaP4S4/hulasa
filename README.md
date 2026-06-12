@@ -25,7 +25,7 @@ Yazılar ve teknik dokümanlar, tamamen terminal ve arama dostu (scannable) olac
 
 ### 🗺️ Doküman Fihristi
 
-Bu kütüphane içindeki tüm makalelere, güncel durumlara ve doğrudan bağlantılara tek bir merkezden ulaşmak, Obsidian ve benzeri markdown araçlarına entegre şekilde göz gezdirmek için **Kütüphane İndeksi (`index.md`)** sayfasını ziyaret edebilirsiniz.
+Bu kütüphane içindeki tüm makalelere, güncel durumlara ve doğrudan bağlantılara tek bir merkezden ulaşmak, Obsidian ve benzeri markdown araçlarına entegre şekilde göz gezdirmek için [Kütüphane İndeksi](index.md) sayfasını ziyaret edebilirsiniz.
 
 ### 📜 Yazım Standartları
 
