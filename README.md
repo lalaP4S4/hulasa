@@ -1,7 +1,7 @@
 # 🗺️ HULÂSA | Siber Güvenlik ve Sistem Notları
 
 <p align="center">
-  <img src="./assets/images/hulasa-logo2.png" alt="Hulâsa Logo" >
+  <img src="./assets/images/hulasa-logo.png" alt="Hulâsa Logo" >
 </p>
 
 <h1 align="center">Hulâsa</h1>
