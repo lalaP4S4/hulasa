@@ -7,17 +7,15 @@
 .obsidian/caches/
 .obsidian/.trash/
 
-# obsidian klasörünün tamamı
-.obsidian/
-
 # İşletim sistemi geçici dosyaları
 .DS_Store
 Thumbs.db
 
-#templates klasörünü gecici olarak ekledim.
+#gizlenecek klasörler
 templates/
+.obsidian/
 
-# git.sh eklendi
+# gizlenecek dosyalar
 git.sh
-# index.md.bak dosyası eklendi.
+generate_index.sh
 index.md.bak
