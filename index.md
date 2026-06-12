@@ -5,15 +5,25 @@
 ---
 
 <details open>
-  <summary><b>📂 Assets (0 İçerik)</b></summary><br>
+  <summary><b>📂 Assets (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>📂 Defensive Security (0 İçerik)</b></summary><br>
+  <summary><b>📂 Defensive Security (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
@@ -36,37 +46,67 @@
 </details>
 
 <details open>
-  <summary><b>📂 Endpoint Security (0 İçerik)</b></summary><br>
+  <summary><b>📂 Endpoint Security (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>📂 Linux Systems (0 İçerik)</b></summary><br>
+  <summary><b>📂 Linux Systems (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>📂 Offensive Security (0 İçerik)</b></summary><br>
+  <summary><b>📂 Offensive Security (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>⚡ Quick Notes (0 İçerik)</b></summary><br>
+  <summary><b>⚡ Quick Notes (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>📂 Software Development (0 İçerik)</b></summary><br>
+  <summary><b>📂 Software Development (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
 
 <details open>
-  <summary><b>📂 Templates (0 İçerik)</b></summary><br>
+  <summary><b>📂 Templates (0
+0 İçerik)</b></summary><br>
 
-  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
+  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
+      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
+      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
+  </tbody></table>
 </details>
