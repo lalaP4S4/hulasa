@@ -66,14 +66,7 @@
 </details>
 
 <details open>
-  <summary><b>📂 Templates (1 İçerik)</b></summary><br>
+  <summary><b>📂 Templates (0 İçerik)</b></summary><br>
 
-  <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
-    <thead><tr style="background-color: #1a1a1a; border-bottom: 2px solid #333;">
-      <th align="left" style="width: 75%; padding: 10px;"><b>Doküman Başlığı</b></th>
-      <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
-      <tr style="border-bottom: 1px solid #333;">
-        <td style="padding: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">📄 <b><a href="templates/offensive-template.md.md">AD - Kerbrute Kullanıcı Taraması (User Enumeration)</a></b></td>
-        <td style="padding: 8px;"><code>#hülâsa</code></td></tr>
-  </tbody></table>
+  <blockquote><i>Bu kategoride henüz yayına alınmış bir hülâsa bulunmuyor.</i></blockquote>
 </details>
