@@ -16,7 +16,7 @@ templates/
 .obsidian/
 
 # gizlenecek dosyalar
-git.sh
-generate_index.sh
+*.sh
+*.txt
 index.md.bak
-obsidian_ozet.txt
+
