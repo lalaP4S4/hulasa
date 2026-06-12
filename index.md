@@ -17,7 +17,7 @@ Bu sayfa, `hulasa` bünyesindeki tüm teknik risale ve notların merkezi yöneti
 
 | Doküman Başlığı                                                                            |     Durum     | Son Güncelleme |
 | :----------------------------------------------------------------------------------------- | :-----------: | :------------: |
-| 📝 [Trend Micro Deep Security AD OU limitation](dsm-ad-ou-limitation.md) | 🟢 Production |   2026-06-11   |
+| 📝 [Trend Micro Deep Security AD OU limitation](endpoint-security/dsm-ad-ou-limitation.md) | 🟢 Production |   2026-06-11   |
 | 📝                                                                                         |               |                |
 
 ## 🐧 Linux Systems (Sistem Yönetimi & Hardening)
