@@ -7,6 +7,9 @@
 .obsidian/caches/
 .obsidian/.trash/
 
+# obsidian klasörünün tamamı
+.obsidian/
+
 # İşletim sistemi geçici dosyaları
 .DS_Store
 Thumbs.db
