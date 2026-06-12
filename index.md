@@ -13,12 +13,19 @@ Bu sayfa, `hulasa` bünyesindeki tüm teknik risale ve notların merkezi yöneti
 
 ---
 
+## Endpoint Security (Son Kullanıcı Güvenliği)
+
+| Doküman Başlığı                                                                            |     Durum     | Son Güncelleme |
+| :----------------------------------------------------------------------------------------- | :-----------: | :------------: |
+| 📝 [Trend Micro Deep Security AD OU limitation](endpoint-security/dsm-ad-ou-limitation.md) | 🟢 Production |   2026-06-11   |
+| 📝                                                                                         |               |                |
+
 ## 🐧 Linux Systems (Sistem Yönetimi & Hardening)
 
-| Doküman Başlığı | Durum | Son Güncelleme |
-| :--- | :---: | :---: |
-| 📝 [NTFS Superblock ve Dirty Flag Terminal ile Tamir Prosedürü](linux-systems/ntfs-superblock-repair.md) | 🟢 Production | 2026-02-15 |
-| 📝 [Parrot OS Geliştirici Ortamı Optimizasyon Notları](linux-systems/parrot-os-optimization.md) | 🟡 Draft | 2026-05-10 |
+| Doküman Başlığı                                                                                          |  Durum   | Son Güncelleme |
+| :------------------------------------------------------------------------------------------------------- | :------: | :------------: |
+| 📝 [NTFS Superblock ve Dirty Flag Terminal ile Tamir Prosedürü](linux-systems/ntfs-superblock-repair.md) | 🟡 Draft |   2026-02-15   |
+| 📝 [Parrot OS Geliştirici Ortamı Optimizasyon Notları](linux-systems/parrot-os-optimization.md)          | 🟡 Draft |   2026-05-10   |
 
 ---
 
@@ -33,8 +40,8 @@ Bu sayfa, `hulasa` bünyesindeki tüm teknik risale ve notların merkezi yöneti
 
 ## ⚡ Quick Notes (Hızlı Hatırlatıcılar & Komutlar)
 
-*   🛠️ [Linux Terminalinde vi Editörü Kullanım ve Kısayol Kılavuzu](quick-notes/vi-editor-shortcuts.md)
-*   🛠️ [Sık Kullanılan Güvenlik ve Log Analizi Regex Kalıpları](quick-notes/regex-match-patterns.md)
+*   🛠️ [Linux Terminalinde vi Editörü Kullanım ve Kısayol Kılavuzu](quick-notes/vi-editor-shortcuts.md)  🟡 Draft
+*   🛠️ [Sık Kullanılan Güvenlik ve Log Analizi Regex Kalıpları](quick-notes/regex-match-patterns.md)  🟡 Draft
 
 ---
 *Durum Göstergeleri: 🟢 Production (Yayında/Tamamlandı) | 🟡 Draft (Taslak/Geliştiriliyor) | 🔴 Archive (Güncelliğini Yitirdi)*
