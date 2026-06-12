@@ -6,10 +6,10 @@ Bu sayfa, `hulasa` bünyesindeki tüm teknik risale ve notların merkezi yöneti
 
 ## 🛡️ Email Security (E-Posta Güvenliği)
 
-| Doküman Başlığı | Durum | Son Güncelleme |
-| :--- | :---: | :---: |
-| 📝 [Trend Micro DDEI Outbound Header Hiding Kılavuzu](email-security/ddei-outbound-header-hiding.md) | 🟢 Production | 2026-06-11 |
-| 📝 [SPF, DKIM ve DMARC Politika Sıkılaştırma Temelleri](email-security/spf-dkim-dmarc-essentials.md) | 🟡 Draft | 2026-06-11 |
+| Doküman Başlığı                                                                                      |     Durum     | Son Güncelleme |
+| :--------------------------------------------------------------------------------------------------- | :-----------: | :------------: |
+| 📝 [Trend Micro DDEI Outbound Header Hiding Kılavuzu](email-security/ddei-outbound-header-hiding.md) | 🟢 Production |   2026-06-11   |
+| 📝 [SPF, DKIM ve DMARC Politika Sıkılaştırma Temelleri](email-security/spf-dkim-dmarc-essentials.md) |   🟡 Draft    |   2026-06-11   |
 
 ---
 
