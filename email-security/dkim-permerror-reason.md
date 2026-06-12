@@ -1,136 +1,111 @@
-Bismillâhirrahmânirrahîm.
+---
+title: DKIM PermError Soruşturması ve Çözüm Analizi
+description: E-posta ağ geçitlerinde ve doğrulama hatlarında karşılaşılan 'DKIM PermError (permanent error)' hatasının kök neden analizi, RFC standartları çerçevesinde incelenmesi ve çözüm metodolojileri.
+tags:
+  - email-security
+  - dkim
+  - dns
+  - troubleshooting
+  - defensive-security
+status: "Published"
+date:
+last_updated: 2026-06-12
+---
+# 🛡️ DKIM PermError Soruşturması ve Kök Neden Analizi
 
-Hamd-i bî-pâyân âlemlerin Rabbi olan Allah Teâlâ’ya; salât ü selâm-ı bî-nihâye Enbiyâlar Serveri Efendimiz Hazret-i Muhammed’e, O'nun âl ve ashâbının cümlesine olsun.
+> 💡 **Mebâdi-i Risale:** Bu doküman, gelen e-posta trafiğinin kimlik doğrulama katmanında (L7 - Application Katmanı SMTP Güvenliği) sıkça rastlanan ve meşru e-postaların dahi karantinaya düşmesine veya reddedilmesine sebep olan `dkim=permerror` durumunu teknik derinliğiyle analiz etmek amacıyla kaleme alınmıştır.
 
-Tenzih ve takdis ederiz ki, Senin bize tâlim buyurduğundan gayrı hiçbir ilmimiz yoktur; muhakkak ki Alîm and Hakîm olan ancak Sensin. Kezâlik, Senin bize ihsan ve tefhim buyurduğundan başka hiçbir fehmimiz ve idrakimiz yoktur; şüphesiz Cevâd ve Kerîm olan ancak Sensin.
+---
 
-Emmâ ba'd;
+## 1. Problemin Teşhisi (Problem Definition)
 
-# 📑 DKIM Permerror Hatasının Genel Sebepleri ve Çözüm Yolları
+E-posta güvenlik ağ geçitleri (SEG), alıcı sunucular veya DMARC raporlama mekanizmaları, gelen bir e-postanın `Authentication-Results` başlığında (header) aşağıdaki gibi bir hata kırılımı raporlayabilir:
 
-> **Mebâdi-i Aşere (Hulasa-i Kelâm):**
-> 
-> - **Had (Tanım):** DKIM (DomainKeys Identified Mail) doğrulama sürecinde, kriptografik imzanın kalıcı olarak geçersiz sayılmasına yol açan `permerror` (Permanent Error) durumunun yapısal anatomisidir.
->     
-> - **Gâye (Amaç):** E-posta ağ geçitleri (SEG) ve posta sunucuları (MTA) arasındaki imza kırılmalarını engellemek, alan adı itibarını korumak ve sahteciliği (spoofing) proaktif olarak önlemek.
->     
-> - **Semere (Fayda):** Kurumsal e-postaların spam filtrelerine takılmadan hedefe ulaşması, DMARC politikalarının sıhhatle işletilmesi ve güvenli e-posta akış mimarisi.
->     
+```text
+Authentication-Results: mx.local;
+       dkim=permerror reason="key syntax error" header.d=example.com header.s=selector1;
+       dmarc=fail (p=reject) action=reject header.from=example.com;
+````
 
-## 🏛️ 1. Dîbâce (Executive Summary & Tehdit Profillemesi)
+### Hata Karakteristiği
 
-E-posta güvenlik mimarilerinde DKIM, mesajın iletim esnasında bütünlüğünün bozulmadığını ve kaynağının doğruluğunu garanti altına alan asimetrik bir kriptografi katmanıdır. Alıcı sunucu, gelen e-postanın üst bilgisindeki (`header`) imza değerini, gönderici alan adının DNS kayıtlarındaki public key ile çözer.
-
-Eğer bu süreçte imza doğrulaması kalıcı olarak başarısız olursa, alıcı MTA **DKIM Permerror** kaydı üretir. Bu hata geçici bir ağ kesintisinden (`temperror`) farklı olarak; ya verinin yolda tahrif edildiğini ya da mimari bir yapılandırma hatasını işaret eder. Bu makale, kurumsal SEG, milter ve akış mimarilerinde `permerror` hatasına sebebiyet veren anomalileri ve çözüm metodolojilerini inceler.
-
-- **İlgili Katman:** Email Security (MTA, Secure Email Gateway)
+- **Hata Türü:** Kalıcı Hata (Permanent Error).
     
-- **Risk Derecesi:** Yüksek (E-Posta Teslimat ve İtibar Kaybı)
+- **Etkisi:** DKIM doğrulaması `Fail` kabul edilir. Eğer alan adının sert bir DMARC politikası (`p=quarantine` veya `p=reject`) varsa ve SPF hizalaması (alignment) kurtarmıyorsa, e-posta doğrudan engellenir.
     
-- **Referanslar / Standartlar:** RFC 6376 (DKIM), MITRE ATT&CK T1585.002
-    
-
-## 🛠️ 2. Usul ve Tatbikat (Anatomi ve Kök Nedenler)
-
-### A. İmza Sonrası İçerik Müdahaleleri
-
-MTA veya SEG tarafından kriptografik imza basıldıktan sonra, e-posta gövdesinde (`body`) veya kritik başlıklarında yapılacak en ufak bir değişiklik `permerror` ile sonuçlanır.
-
-1. **Footer / Disclaimer Injection:** Kurumsal imza veya yasal uyarı metinlerinin e-postanın en altına merkezi ağ geçitleri tarafından sonradan eklenmesi.
-    
-2. **Subject Tagging:** Antivirüs veya antispam sistemlerinin, mail başlığına `[SPAM]` veya `[EXTERNAL]` gibi etiketler enjekte etmesi.
-    
-3. **MTA / Gateway Modifikasyonları:** Aradaki aktarım sunucularının mail gövdesini veya MIME yapısını yeniden kodlaması.
+- **Kritik Ayrım:** `TempError` (Geçici DNS timeout durumları) aksine, `PermError` durumunda e-posta altyapısı tekrar deneme yapmaz; kaydın veya imzanın kalıcı olarak bozuk olduğuna hükmeder.
     
 
-> [!CAUTION]
-> 
-> **Mimari Altın Kural:** E-posta üzerindeki tüm içerik manipülasyonları, etiketlemeler ve imza eklemeleri **DKIM imzalama motorundan önce** tamamlanmalıdır. DKIM, e-postanın çıkış kapısındaki en son mühür olmalıdır.
+## 2. Kök Neden Analizi (Root Cause Analysis - RCA)
 
-### B. Satır Sonu (Newline) ve Canonicalization İlişkisi
+`DKIM PermError` hatası, temel olarak iki ana kaynaktan meydana gelir: **DNS tarafındaki kayıt bozuklukları** veya **MTA/SEG katmanındaki imzalama/şifreleme uyumsuzlukları**.
 
-E-postalar platformlar arası iletilirken satır sonu karakterleri değişikliğe uğrayabilir:
+### Senaryo A: DNS TXT Kaydındaki Sözdizimi Hataları (Syntax Errors)
 
-- **Windows (CRLF):** `\r\n`
+RFC 6376 standartlarına göre, bir DNS DKIM TXT kaydı belirli etiketler (tags) ve kurallarla yazılmalıdır. En sık yapılan hatalar şunlardır:
+
+1. **Gereksiz Karakter Sızıntıları:** Kayıt kopyalanırken satır sonu karakterleri (`\n`), ters bölü (`\`) veya görünmez boşlukların DNS paneline yapışması.
     
-- **Unix/Linux (LF):** `\n`
+2. **Yatık Tırnak (Quotation Mark) Sorunları:** 2048-bit RSA anahtarları tek bir TXT kaydı sınırını (255 karakter) aştığı için split (bölünmüş) mimaride yazılır. Bu bölünme esnasında tırnakların yanlış kapatılması anahtarın bütünlüğünü bozar.
     
-
-DKIM imzalama esnasında bu farkların tolere edilebilmesi için **Canonicalization** algoritması kullanılır:
-
-- **Simple:** Boşluklara ve satır sonlarına karşı aşırı hassastır. Birebir eşleşme ister, en ufak karakter kaymasında imza kırılır ve `permerror` üretir.
-    
-- **Relaxed:** Satır sonlarındaki ve gövdedeki fazla boşlukları, tab karakterlerini ve platform farklarını tolere eder.
+3. **Kritik Etiket Hataları:** `p=` (public key) etiketinin başında veya sonunda boşluk kalması, `k=rsa` tanımlamasında hata yapılması.
     
 
-## 📜 3. Çözüm Önerileri ve En İyi Uygulamalar
+### Senaryo B: İmzalama Esnasındaki Karakter Dönüşümleri (Header/Body Modification)
 
-1. **Canonicalization Seçimi:** Kurumsal mail akışlarında, farklı işletim sistemlerine sahip gateway'lerin toleransı için ayar her zaman **`relaxed/relaxed`** (Header/Body) olarak set edilmelidir.
+E-posta gönderen taraftaki bir ara sunucu (Internal Mail Server, DLP, Antivirüs Ajanı vb.), mesajın başlıklarını veya gövdesini imza atıldıktan sonra değiştirirse, alıcı taraftaki hash doğrulaması tutmaz ve `PermError` tetiklenebilir:
+
+- **Header Canonicalization (Hizalama):** `simple` veya `relaxed` algoritmalarının sınırlarını aşan büyük harf/küçük harf dönüşümleri.
     
-2. **Kriptografik Sıkılaştırma:** 1024 bit yerine güncel standart olan **2048 bit RSA** anahtarları kullanılmalıdır.
-    
-3. **DNS Chunking:** 2048 bit anahtarlar tek bir TXT satır limitini (255 karakter) aşabileceği için DNS üzerinde parçalı biçimde girilmelidir.
+- **Body Alteration:** E-postanın altına otomatik eklenen yasal uyarılar (disclaimer) veya yazı tipi dönüştürmeleri.
     
 
-## 🗂️ 4. Örnek DKIM DNS Kayıtları ve Mimari Senaryolar
+## 3. Teşhis ve Doğrulama Metodolojisi (Verification Steps)
 
-### A. 1024 bit Anahtar Yapısı (Tek Satır)
+Problemin kaynağını tespit etmek için L7 SMTP simülasyonu ve DNS sorgulama katmanları izole edilmelidir.
 
-Anahtar boyutu kısa olduğu için tek parça halinde girilmesi yeterlidir:
+### Adım 1: DNS Katmanının Sorgulanması
 
-Plaintext
-
-```
-default._domainkey.example.com. IN TXT "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArvL1lH..."
-```
-
-### B. 2048 bit Anahtar Yapısı (Parçalı - Chunked)
-
-255 karakterlik TXT sınırını aşmamak adına DNS editörüne tırnak işaretlerine ve boşluklara dikkat edilerek girilmelidir:
-
-Plaintext
-
-```
-default._domainkey.example.com. IN TXT (
-  "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArvL1lH..."
-  "abc123xyz987...."
-  "mno456pqr789...."
-)
-```
-
-### C. Canonicalization Matrisi
-
-|**Senaryo**|**Önerilen Ayar**|**Olası Etki / Risk**|
-|---|---|---|
-|Format farkı olmayan izole ortamlar|`simple/simple`|Güvenli fakat en ufak boşlukta kırılgan|
-|Karma mimariler (Windows + Linux)|`relaxed/relaxed`|**Tavsiye Edilen;** yüksek toleranslı|
-|Gövdeye müdahale edilen (Footer/Tagging) aktif ortamlar|`relaxed/relaxed`|**Yetersiz;** DKIM kalıcı olarak başarısız olur|
-
-## 🔍 5. Teftiş ve Doğrulama (Verification & Test Tools)
-
-DKIM yapılandırmasının ve üretilen imzaların geçerliliğini doğrulamak için aşağıdaki araçlar ve komut satırı yöntemleri kullanılmalıdır.
-
-### A. Komut Satırı ile DNS Sorgulaması
-
-Public key'in DNS'e doğru yansıyıp yansımadığını ve tırnak işaretlerinin doğruluğunu terminalden kontrol edin:
+İlgili seçici (selector) ve alan adı üzerinden ham TXT kaydı çekilmeli ve karakter analizi yapılmalıdır.
 
 Bash
 
 ```
-# Linux / Parrot OS terminalinden dig ile sorgulama
-dig TXT default._domainkey.example.com
+# Ham DKIM kaydını dig ile çekme
+dig TXT selector1._domainkey.example.com +short
+
+# Çıktıda tırnak işaretlerinin ve boşlukların kontrolü:
+# Örn: "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
 ```
 
-### B. Çevrimiçi Teftiş Platformları
+### Adım 2: Sözdizimi (Parser) Kontrolü
 
-|**Araç / Site**|**Kullanım Amacı**|
-|---|---|
-|[dkimvalidator.com](https://dkimvalidator.com/)|Gelen mailin ham başlıklarını inceleyerek DKIM ve SPF kontrolü yapar.|
-|[mail-tester.com](https://www.mail-tester.com/)|Gönderilen e-postanın genel spam skorunu ve DKIM geçerliliğini puanlar.|
-|[mxtoolbox.com](https://mxtoolbox.com/dkim.aspx)|DNS üzerindeki DKIM TXT kaydının formatını ve bütünlüğünü doğrular.|
+Ham anahtar metni üzerinde base64 validasyonu yapılmalıdır. Eğer anahtarın içinde geçersiz bir karakter varsa, aşağıdaki komut decode hatası verecektir:
 
-## 🏁 Hâtime (Sonuç & Risk Yönetimi)
+Bash
 
-DKIM katmanında meydana gelen `permerror` hataları, kurumsal posta itibarını zedeleyerek DMARC politikalarının (`reject` veya `quarantine`) devreye girmesine ve meşru maillerin drop edilmesine sebep olur. Doğru canonicalization seçimi, imzalama motorunun akıştaki doğru konumu ve hatasız DNS chunking uygulaması ile kalıcı hataların önüne geçilmesi elzemdir.
+```
+# p= etiketindeki değeri izole edip base64 decode testi yapma
+echo -n "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8..." | base64 -d > /dev/null
+if [ $? -ne 0 ]; then
+    echo "[-] Hata: DKIM Public Key içerisinde geçersiz Base64 karakterleri tespit edildi!"
+fi
+```
 
-Sübhâne rabbike rabbi’l-izzeti ammâ yasifûn. Ve selâmün ale’l-mürselîn. Ve’l-hamdü lillâhi rabbi’l-âlemîn.
+## 4. Çözüm ve Sıkılaştırma (Mitigation & Hardening)
+
+Problemin kalıcı olarak çözülmesi için aşağıdaki aksiyon planı uygulanmalıdır:
+
+|**Katman**|**Aksiyon Maddesi**|**RFC Referansı**|
+|---|---|---|
+|**DNS Yönetimi**|2048-bit uzunluğundaki anahtarlar DNS sağlayıcısına girilirken tek parça halinde değil, sağlayıcının sınırlarına uygun şekilde ("part1" "part2") tırnaklarla ayrılmış formatta girilmelidir.|RFC 1035 / RFC 6376|
+|**SEG Yapılandırması**|Gönderim yapılan Mail Gateway üzerinde DKIM canonicalization ayarı `relaxed/relaxed` olarak güncellenmelidir. Bu sayede boşluk ve küçük/büyük harf esnemelerine izin verilir.|RFC 6376 Section 3.4|
+|**Anahtar Değişimi**|Eğer mevcut private/public key çiftinde yapısal bir bozulma varsa, eski seçici (selector) emekliye ayrılmalı (revocation) ve yeni bir selector ile temiz anahtar üretilmelidir.|-|
+
+### Örnek Doğru DNS Kayıt Formatı (Splitted RSA-2048)
+```
+v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Y...[255 karakter]... " " ...[geri kalan karakterler]...
+```
+## 5. Mühendislik Notları (Architectural Verdict)
+
+`DKIM PermError`, sistemlerin esnek mimariler tasarlarken RFC standartlarına ne kadar sıkı bağlı kalması gerektiğini gösteren bir L7 Application katmanı klasiğidir. E-posta hattındaki otomasyon ve güvenlik scriptlerinin bu tür anomalileri parse edebilmesi adına, log analiz şablonlarına `reason="key syntax error"` regex paternlerinin eklenmesi defansif mimariyi tahkim edecektir. Bu konu ayrı bir makale konusu olarak [DKIM Sorun Giderme: reason='key syntax error' Analizi ve Çözümü](email-security/dkim-key-syntax-error) işlenmiştir.

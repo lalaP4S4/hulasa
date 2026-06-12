@@ -1,20 +1,20 @@
 ---
 title: "Trend Micro DDEI'da Outbound Header Hiding: Undocumented Postfix ve SSH ile Sıkılaştırma Rehberi"
+description: '"Trend Micro Deep Discovery Email Inspector (DDEI) üzerinde inbound (gelen) mail analiz yeteneklerini ve antispam motorunu kör etmeden, sadece outbound (giden) SMTP trafiğindeki dahili IP, FQDN ve tescilli X-header bilgilerini Postfix `smtp_header_checks` mekanizmasıyla izole ederek temizleme ve iç ağ topolojisini gizleme (obfuscation) rehberi."'
+category: Email Security
+tags:
+  - ddei
+  - trend-micro
+  - postfix
+  - hardening
+  - outbound
+  - header
+  - email-security
+status: "Published"
 date: 2026-06-11
-category: "Email Security"
-tags: [ddei, trend-micro, postfix, hardening, outbound]
-status: production
+last_updated: 2026-06-12
 ---
-
-> **Bismillâhirrahmânirrahîm.**
-> 
-> **Elhamdülillâhi Rabbi’l-âlemîn, vesselâtü vesselâmü alâ Rasûlinâ Muhammedin ve alâ âlihî ve sahbihî ecmaîn.**
-> 
-> **Sübhâneke lâ ilme lenâ illâ mâ allemtenâ, inneke ente’l-alîmü’l-hakîm. (Bakara-32)**
-> 
-> **Sübhâneke lâ fehme lenâ illâ mâ fehhemtenâ, inneke ente’l-cevâdü’l-kerîm.**
-> 
-> **Ammâ ba’d;**
+> 💡 **Mebâdi-i Risale:** Bu doküman, kurumsal e-posta ağ geçitleri (L7 katmanı SMTP Gateway) üzerinden dış dünyaya sızan ve siber saldırganların keşif (*reconnaissance*) safhasında iç topolojiyi haritalandırmasına zemin hazırlayan hassas iç ağ verilerinin, Postfix mimarisi manipüle edilerek izole edilmesi ve gizlenmesi amacıyla kaleme alınmıştır.
 
 Kurumsal e-posta güvenliğinde sıkılaştırma (**hardening**) dendiğinde akla ilk gelen adımlardan biri, dış dünyaya giden e-postalardaki hassas iç ağ bilgilerini gizlemektir. E-posta üstbilgilerinde (**headers**) sızan dahili IP adresleri, iç ağdaki Exchange veya Relay sunucularının FQDN (tam nitelikli alan adı) bilgileri, siber saldırganların keşif (**reconnaissance**) aşamasında organizasyon şemanızı ve topolojinizi kolayca haritalandırmasına neden olur.
 
@@ -199,5 +199,3 @@ Yaptığınız işlemlerin doğruluğundan emin olmak için iki yönlü test sen
     > ℹ️ **Not:** DDEI üzerinde _Message Tracking_ loglarında mail sunucunuzdan gelen IP bilgisi artık `Unknown` olarak görünecektir. Bu beklenen ve mimarinin çalıştığını gösteren bir durumdur.
     
 - **Gelen (Inbound) Testi:** Dışarıdan içeriye bir mail atın ve DDEI’ın bu maile ait header’ları bozmadığını, antispam ve güvenlik analizlerinin loglarda sorunsuz tetiklendiğini görün.
-    
-> **Sübhâne rabbike rabbi’l-izzeti ammâ yasifûn. Ve selâmün ale’l-mürselîn. Ve’l-hamdü lillâhi rabbi’l-âlemîn.**
