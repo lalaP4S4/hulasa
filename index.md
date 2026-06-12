@@ -35,13 +35,13 @@
       <th align="left" style="width: 25%; padding: 10px;"><b>Etiketler</b></th></tr></thead><tbody>
       <tr style="border-bottom: 1px solid #333;">
         <td style="padding: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">📄 <b><a href="email-security/ddei-outbound-header-hiding.md">Trend Micro DDEI'da Outbound Header Hiding: Undocumented Postfix ve SSH ile Sıkılaştırma Rehberi</a></b></td>
-        <td style="padding: 8px;">`#tags:`</td></tr>
+        <td style="padding: 8px;"><code>#hülâsa</code></td></tr>
       <tr style="border-bottom: 1px solid #333;">
         <td style="padding: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">📄 <b><a href="email-security/dkim-key-syntax-error.md">DKIM Sorun Giderme: reason='key syntax error' Analizi ve Çözümü</a></b></td>
-        <td style="padding: 8px;">`#tags:`</td></tr>
+        <td style="padding: 8px;"><code>#hülâsa</code></td></tr>
       <tr style="border-bottom: 1px solid #333;">
         <td style="padding: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">📄 <b><a href="email-security/dkim-permerror-reason.md">DKIM PermError Soruşturması ve Çözüm Analizi</a></b></td>
-        <td style="padding: 8px;">`#tags:`</td></tr>
+        <td style="padding: 8px;"><code>#hülâsa</code></td></tr>
   </tbody></table>
 </details>
 
